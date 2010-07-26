@@ -76,10 +76,9 @@ sub init_symbols {
     $parser->symbol('(name)')->set_std(\&std_name);
 
     # operators
-    $parser->symbol('|')      ->set_led(\&led_pipe); # reset
-    $parser->symbol('.')      ->set_led(\&led_dot);  # reset
-    $parser->infix('->', $parser->symbol('.')->lbp)
-                              ->set_led(\&led_dot);  # alias to .
+    $parser->symbol('|') ->set_led(\&led_pipe); # reset
+    $parser->symbol('.') ->set_led(\&led_dot);  # reset
+    $parser->make_alias('.' => '->');
 
     # special variables
     $parser->symbol('$clevy') ->set_nud(\&nud_clevy_context);
@@ -165,16 +164,16 @@ sub attr_list {
     while(1) {
         my $key = $parser->token;
         if(!($key->arity eq "name"
-                # look ahead for the next token
-                and $parser->next_token->[1] eq '=')) {
+                and $parser->next_token_is('='))) {
             last;
         }
         $parser->advance();
         $parser->advance("=");
 
         my $value;
-        if($parser->token->arity eq "name") {
-            $value = $parser->token->clone(arity => 'literal');
+        my $t = $parser->token;
+        if($t->arity eq "name" && !$t->is_defined) {
+            $value = $t->clone(arity => 'literal');
             $parser->advance();
         }
         else {
@@ -358,3 +357,10 @@ sub _not_implemented {
 
 no Any::Moose;
 1;
+__END__
+
+=head1 NAME
+
+Text::Clevy::Parser - The Clevy parser
+
+=cut

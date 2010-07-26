@@ -27,11 +27,11 @@ requires:
   HTML::Entities: 1.35
   Image::Size: 3.22
   Plack: 0.9938
-  Text::Xslate: 0.1047
+  Text::Xslate: 0.1048
   Time::Piece: 1.12
   URI::Escape: 3.3
   perl: 5.8.1
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/gfx/p5-Text-Clevy.git
-version: 0.0001_01
+version: 0.0001_02
