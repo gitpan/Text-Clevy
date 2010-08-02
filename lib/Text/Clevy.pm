@@ -4,7 +4,7 @@ use 5.008_001;
 use strict;
 use warnings;
 
-our $VERSION = '0.0001_02';
+our $VERSION = '0.0001_03';
 
 sub smarty_compatible_version { '2.6' }
 
@@ -22,8 +22,8 @@ my %builtin = (
     '@clevy_set_foreach_property' => \&_set_foreach_property,
     '@clevy_array_is_not_empty'   => \&_array_is_not_empty,
     '@clevy_not_implemented'      => \&_not_implemented,
-    Text::Clevy::Function->get_table(),
-    Text::Clevy::Modifier->get_table(),
+    Text::Clevy::Function->methods(),
+    Text::Clevy::Modifier->methods(),
 );
 
 sub default_functions { \%builtin }
@@ -102,7 +102,7 @@ Text::Clevy - Smarty compatible template engine on Xslate
 
 =head1 VERSION
 
-This document describes Text::Clevy version 0.0001_02.
+This document describes Text::Clevy version 0.0001_03.
 
 =head1 SYNOPSIS
 
@@ -129,7 +129,8 @@ This document describes Text::Clevy version 0.0001_02.
 Text::Clevy is a Smarty compatible template engine implemented
 on Xslate.
 
-This software is under development.
+This software is under development. Feel free to send any feature requests and/or
+bug reports.
 
 =head1 INTERFACE
 

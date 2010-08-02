@@ -2,6 +2,8 @@ package Text::Clevy::Function;
 use strict;
 use warnings;
 
+use parent qw(Text::Xslate::Bridge);
+
 use Any::Moose '::Util::TypeConstraints';
 use File::Spec;
 
@@ -36,7 +38,7 @@ our $EngineClass = 'Text::Clevy';
 # Implemented as statements:
 # {capture}, {foreach}, {literal}, {section}, {strip}
 # {include}
-my @functions = map { $_ => __PACKAGE__->can($_) || _make_not_impl($_) } qw(
+my %function = map { $_ => __PACKAGE__->can($_) || _make_not_impl($_) } qw(
     config_load
     include_php
     insert
@@ -60,8 +62,7 @@ my @functions = map { $_ => __PACKAGE__->can($_) || _make_not_impl($_) } qw(
     pupup_init
     textformat
 );
-
-sub get_table { @functions }
+__PACKAGE__->bridge(function => \%function);
 
 sub _make_not_impl {
     my($name) = @_;
@@ -556,7 +557,7 @@ sub html_select_date {
         display_years      => \my $display_years,      $Bool, false, true,
 
         month_format       => \my $month_format,       $Str,  false, '%B',   # for strftime
-        month_value_format => \my $month_value_format, $Str,  false, '%m',  # for strftime
+        month_value_format => \my $month_value_format, $Str,  false, '%m',   # for strftime
         day_format         => \my $day_format,         $Str,  false, '%02d', # for sprintf
         day_value_format   => \my $day_value_format,   $Str,  false, '%d',   # for sprintf
 
@@ -931,5 +932,9 @@ Not supported.
 =head2 textformat
 
 Not supported.
+
+=head1 SEE ALSO
+
+L<Text::Clevy>
 
 =cut
