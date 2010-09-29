@@ -1,7 +1,7 @@
 ---
 abstract: 'Smarty compatible template engine on Xslate'
 author:
-  - 'Goro Fuji (gfx) <gfuji(at)cpan.org>'
+  - 'Fuji, Goro (gfx) <gfuji(at)cpan.org>'
 build_requires:
   ExtUtils::MakeMaker: 6.42
   Test::More: 0.88
@@ -33,4 +33,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: git://github.com/gfx/p5-Text-Clevy.git
-version: 0.0001_03
+version: 0.0002
